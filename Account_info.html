@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tokopedia Assignment</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <script type="text/javascript">
+            function edit(){
+                document.getElementById('fname').removeAttribute("disabled");
+				document.getElementById('lname').removeAttribute("disabled");
+				document.getElementById('dob').removeAttribute("disabled");
+            }
+            function save(){
+                document.getElementById('fname').disabled=true;
+				document.getElementById('lname').disabled=true;
+				document.getElementById('dob').disabled=true;
+            }
+            function check(){
+                if (document.getElementById('fname').disabled==false)
+                {
+                    alert("Please click on save before submit.");
+                    return false;
+                }else{
+                    edit();
+                    return true;
+                }
+                
+            }
+			function load(){
+				var fname=readCookie("fname")
+				var lname=readCookie("lname")
+				var dob=readCookie("dob")
+				var status=readCookie("status")
+				document.getElementById('fname').value=fname;
+				document.getElementById('lname').value=lname;
+				document.getElementById('dob').value=dob;				
+				if (status!="active")
+                {    
+                    alert("Please activate your account by the link we have sent on your email.");
+                }
+			}
+			function readCookie(name) {
+				var nameEQ = name + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0;i < ca.length;i++) {
+						var c = ca[i];
+					while (c.charAt(0)==' ') c = c.substring(1,c.length);
+						if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+				}
+				return null;
+			}
+        </script>
+    </head>
+    <body background="/static/img/bg.jpg" onload="load()">
+	<div class="header">
+            Tokopedia Assignment
+        </div>
+        <div class="nav">
+            <a href="LogIn.html" class="btn-nav">Personal Info</a>
+            <a href="SignOut" class="btn-nav">Sign Out</a>
+        </div>
+    <h1>Information</h1>
+        <div class="shadow">
+            <form onsubmit="return check()" action="\Update" method="POST">
+                Date of Birth
+                <input type="date" name="dob" id="dob" class="fields" placeholder="Date Of Birth" disabled/><br>
+                <input name="fname" id="fname" class="fields" placeholder="First Name" disabled/><br>
+                <input name="lname" id="lname" class="fields" placeholder="Last Name" disabled/><br>
+                <input type="button" class="btn" value="Edit"onclick="edit()">
+                <input type="button" class="btn" value="Save" onclick="save()">
+                <input type="submit" class="btn" value="Update">
+            </form>
+        </div>
+    </body>
+</html
